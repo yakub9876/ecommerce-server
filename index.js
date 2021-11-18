@@ -10,7 +10,9 @@ const ObjectID = require("mongodb").ObjectID;
 app.use(cors());
 app.use(express.json());
 
-const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.858ok.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
+const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.6mc02.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
+
+// const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.858ok.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
 const client = new MongoClient(uri, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
@@ -45,7 +47,7 @@ async function run() {
       const result = await userCollection.updateOne(
         query,
         updateAdmin,
-        options,
+        options
       );
       res.json(result);
     });
@@ -99,7 +101,7 @@ async function run() {
         const updateOrder = await OrdersCollection.updateOne(
           query,
           updatQuantity,
-          options,
+          options
         );
         res.json(updateOrder);
       } else {
@@ -133,7 +135,7 @@ async function run() {
       const update = await OrdersCollection.updateOne(
         query,
         updateStatus,
-        options,
+        options
       );
       res.json(update);
     });
@@ -143,8 +145,6 @@ async function run() {
       const result = await OrdersCollection.deleteOne(query);
       res.json(result);
     });
-
-  
 
     // user reviews
     app.get("/reviews", async (req, res) => {
